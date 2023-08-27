@@ -2,16 +2,12 @@
 import { useEffect, useState } from "react";
 
 const App = () => {
-
     //1.- Crear useState
     const [tareas, setTareas] = useState([]);
-
     //7.- Crear useState descripcion
     const [descripcion, setDescripcion] = useState("");
-
     //2.- Metodo Obtener
     const mostrarTareas = async () => {
-
         const response = await fetch("api/tarea/Lista");
 
         if (response.ok) {
@@ -36,7 +32,6 @@ const App = () => {
         mostrarTareas();
     }, [])
 
-
     //8.- Guardar NOTA
     const guardarTarea = async (e) => {
 
@@ -57,11 +52,9 @@ const App = () => {
 
     //10 Cerrar Tarea
     const cerrarTarea = async (id) => {
-
         const response = await fetch("api/tarea/Cerrar/" + id, {
             method: "DELETE"
         })
-
         if (response.ok)
             await mostrarTareas();
     }
@@ -75,7 +68,6 @@ const App = () => {
             <div className="row">
                 <div className="col-sm-12"></div>
             </div>
-        
             <div className="row mt-4">
                 <div className="col-sm-12"></div>
             </div>
@@ -83,44 +75,33 @@ const App = () => {
           */
 
         <div className="container bg-dark p-4 vh-100">
-
             {/*Formulario*/}
-            <h2 className="text-white">Lista de tareas</h2>
+            <h2 className="text-white">Lista de tareas en REACT</h2>
             <div className="row">
-
                 <div className="col-sm-12">
                     {/*9.- Crear Formulario*/}
                     <form onSubmit={guardarTarea}> {/*   <form></form>   */}
-
                         <div className="input-group"> {/*  <div class="input-group"></div>    */}
                             <input type="text" className="form-control"
                                 placeholder="Ingrese descripcion"
                                 value={descripcion}
                                 onChange={(e) => setDescripcion(e.target.value)} />
-
                             <button className="btn btn-success">Agregar</button>
                         </div>
-
                     </form>
                 </div>
-
             </div>
 
-
             {/*Lista*/}
-
             <div className="row mt-4">
                 <div className="col-sm-12">
-
                     {/*6.- Listar Tareas*/}
                     <div className="list-group">    {/* <div className="list-group"></div>  */}
                         {
                             tareas.map(
                                 (item) => (
                                     <div key={item.Id} className="list-group-item list-group-item-action">{/*  <div className="list-group-item list-group-item-action"></div>  */}
-
                                         <h5 className="text-primary">{item.descripcion}</h5>
-
                                         <div className="d-flex justify-content-between">    {/*   <div class="d-flex justify-content-between">    */}
                                             <small className="text-muted">{formatDate(item.fechaRegistro)}</small>
                                             <button type="button" className="btn btn-sm btn-outline-danger"
@@ -129,14 +110,12 @@ const App = () => {
                                                 Cerrar
                                             </button>
                                         </div>
-
                                     </div>
                                 )
                             )
                         }
                     </div>
                 </div>
-
             </div>
         </div>
     )
